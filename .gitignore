@@ -1,0 +1,7 @@
+# #： コメント行扱いになる
+# 指定したファイルを除外： 例 index.html
+# ルートディレクトリを指定： root.html
+# ディレクトリ以下を除外： dir
+Compiler/
+*.exe
+WindowSpy.ahk
