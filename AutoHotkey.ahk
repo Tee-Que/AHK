@@ -61,19 +61,19 @@ $sc079::
 ~sc079 & K::Send,{Blind}{Up}      ; 変換 + K = 上カーソルキー
 ~sc079 & L::Send,{Blind}{Right}   ; 変換 + L = 右カーソルキー
 
+/*
 ; Home/End, Page Up/Down も割り当てた (無変換キー)
 ~sc07B & H::Send,{Blind}{Home}    ; 無変換 + H = Home
 ~sc07B & J::Send,{Blind}{PgUp}    ; 無変換 + J = Page Up
 ~sc07B & K::Send,{Blind}{PgDn}    ; 無変換 + K = Page Down
 ~sc07B & L::Send,{Blind}{End}     ; 無変換 + L = End
-
-/*
-; 覚えやすさのため、左右のカーソルキー(H, L)の近くに置いた例
-~sc079 & Y::Send,{Blind}{Home}    ; 変換 + Y = Home
-~sc079 & \::Send,{Blind}{End}     ; 変換 + \ = End
-~sc079 & Y::Send,{Blind}{PgUp}    ; 変換 + Y = Page Up
-~sc079 & \::Send,{Blind}{PgDn}    ; 変換 + \ = Page Down
 */
+
+; Home/End, Page Up/Down。無変換に割り当てると typo でいちいち半角入力になるので、変換キー + 下段のキーにした例。
+~sc079 & N::Send,{Blind}{Home}    ; 変換 + N = Home
+~sc079 & M::Send,{Blind}{PgUp}    ; 変換 + M = Page Up
+~sc079 & ,::Send,{Blind}{PgDn}    ; 変換 + , = Page Down
+~sc079 & .::Send,{Blind}{End}     ; 変換 + . = End
 
 /*
 ; 候補 ①： CapsLock sc03A は不安定らしい
