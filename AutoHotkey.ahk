@@ -150,6 +150,8 @@ sc03A & l::send, {Blind}{Right}
 ------------------------------------------------------------------------------
 */
 ; ★ トップ部分のボタンの調整
+; 念のため、左右同時クリックで、右クリックになるようにしておく。
+RButton & LButton::RButton        
 ; 右クリック ＋ チルト → 戻る/進むに割当
 RButton & WheelLeft::!Left
 RButton & WheelRight::!Right
