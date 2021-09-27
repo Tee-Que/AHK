@@ -3,7 +3,7 @@
 /*
 変換を修飾キーとして扱うための準備
 変換を押し続けている限りリピートせず待機
-変換 vk1C, 無変換 vk1D
+※ スキャンコード：変換 sc079 [vk1C], 無変換 sc07B [vk1D]
 */
 
 $vk1C::
@@ -52,44 +52,44 @@ $vk1C::
 ------------------------------------------------------------------------------
 */
 
-; 変換 + WASD = マウスカーソル上, 左, 下, 右
+; 無変換 + WASD = マウスカーソル上, 左, 下, 右
 ; そのままだと細かい操作には向くが大きな移動には遅すぎる
 ; カーソル操作中にCtrlキーを一瞬押すといい感じにブーストできる
 ; CtrlとShiftでの加速減速はWindowsのマウスキー機能を踏襲
-; 精密操作がしたい時は 変換+Shift+WASD でカーソルをゆっくり動かせる
-~vk1C & W::
-~vk1C & A::
-~vk1C & S::
-~vk1C & D::
-    While (GetKeyState("vk1C", "P"))                 ; 変換キーが押され続けている間マウス移動の処理をループさせる
+; 精密操作がしたい時は 無変換+Shift+WASD でカーソルをゆっくり動かせる
+~sc07B & W::
+~sc07B & A::
+~sc07B & S::
+~sc07B & D::
+    While (GetKeyState("sc07B", "P"))                 ; 無変換キーが押され続けている間マウス移動の処理をループさせる
     {
-        MoveX := 0, MoveY := 0
-        MoveY += GetKeyState("W", "P") ? -11 : 0     ; 変換キーと一緒にIJKLが押されている間はカーソル座標を変化させ続ける
+        MoveX := 0, MoveY := 0                       ; MouseMove で相対座標で動かすために、変数 MoveX MoveY を用意する。
+        MoveY += GetKeyState("W", "P") ? -11 : 0     ; GetKeyState() と ?:演算子(条件) (三項演算子) の組み合わせ
         MoveX += GetKeyState("A", "P") ? -11 : 0
         MoveY += GetKeyState("S", "P") ? 11 : 0
         MoveX += GetKeyState("D", "P") ? 11 : 0
-        MoveX *= GetKeyState("Ctrl", "P") ? 10 : 1   ; Ctrlキーが押されている間は座標を10倍にし続ける(スピードアップ)
-        MoveY *= GetKeyState("Ctrl", "P") ? 10 : 1
-        MoveX *= GetKeyState("Shift", "P") ? 0.3 : 1 ; Shiftキーが押されている間は座標を30%にする（スピードダウン）
-        MoveY *= GetKeyState("Shift", "P") ? 0.3 : 1
-        MouseMove, %MoveX%, %MoveY%, 1, R            ; マウスカーソルを移動する
-        Sleep, 0                                     ; 負荷が高い場合は設定を変更 設定できる値は-1、0、10～m秒 詳細はSleep
+        MoveX *= GetKeyState("Shift", "P") ? 5 : 1   ; Ctrlキーが押されている間は座標を10倍にし続ける(スピードアップ)
+        MoveY *= GetKeyState("Shift", "P") ? 5 : 1
+        MoveX *= GetKeyState("Ctrl", "P") ? 0.3 : 1 ; Shiftキーが押されている間は座標を30%にする（スピードダウン）
+        MoveY *= GetKeyState("Ctrl", "P") ? 0.3 : 1
+        MouseMove, %MoveX%, %MoveY%, 1, R            ; マウスカーソルを移動。MouseMove, X, Y [, Speed, R]。R は現在のカーソル位置からの相対座標になる。
+        Sleep, 10                                     ; 負荷が高い場合は設定を変更 設定できる値は-1、0、10～m秒 詳細はSleep
     }
     Return
 
 ; 以下は筆者のキーボード配列向け
-; 変換 + Del =  左クリック（押し続けるとドラッグ）
-~vk1C & BS::MouseClick,left,,,,,D
-~vk1C & BS Up::MouseClick,left,,,,,U
+; 無変換 + Del =  左クリック（押し続けるとドラッグ）
+~sc07B & BS::MouseClick,left,,,,,D
+~sc07B & BS Up::MouseClick,left,,,,,U
 
 ; 以下は日本語キーボード・英語キーボード向け
-; 変換 + Enter = 左クリック（押し続けるとドラッグ）
-; ~vk1C & Enter::MouseClick,left,,,,,D
-; ~vk1C & Enter Up::MouseClick,left,,,,,U
+; 無変換 + Enter = 左クリック（押し続けるとドラッグ）
+; ~sc07B & Enter::MouseClick,left,,,,,D
+; ~sc07B & Enter Up::MouseClick,left,,,,,U
 
-; 変換 + E = 右クリック
-~vk1C & E::MouseClick,right
+; 無変換 + E = 右クリック
+~sc07B & E::MouseClick,right
 
 ; カーソルキーでファイルを選択した場合の右クリックメニュー表示
 ; Windows10のエクスプローラーの場合メニュー表示後ショートカットキーで項目を選択できる
-~vk1D & F::Send,{Blind}{AppsKey}    ;無変換 + F = アプリケーションキー
+~sc07B & F::Send,{Blind}{AppsKey}    ;無変換 + F = アプリケーションキー

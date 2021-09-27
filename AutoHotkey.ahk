@@ -145,27 +145,27 @@ sc03A & l::send, {Blind}{Right}
 /*
 ------------------------------------------------------------------------------
     G Hub のオンボードメモリからの変換 (G604)
+; G600 については、vk07 とか無害なキーを割当可能なら、薬指ボタンに vk07 を充てた方が良いかも。
 ------------------------------------------------------------------------------
 */
-; ★ 候補 ①
-; G600 については、vk07 とか無害なキーを割当可能なら、薬指ボタンに vk07 を充てた方が良いかも。
-/*
-F13::Send, ; G4 (手前下)
-F14::Send, ; G5
-F15::Send, ; G6 (奥下)
-F16::Send, ; G7 (手前上)
-F17::Send, ; G8
-F18::Send, ; G9 (奥上)
-~RButton & F13::Send, 
-~RButton & F14::Send, 
-~RButton & F15::Send, 
-~RButton & F16::Send, 
-~RButton & F17::Send, 
-~RButton & F18::Send, 
-*/
+; ★ 候補 ① ： 右クリックは生かしたまま修飾キーとしても使用
+; Send 以下の F13-24 の部分を適宜変更する。
+
+F13::LCtrl ; G4 (手前下)
+F14::MButton ; G5 (中列下)
+F15::Send,F15 ; G6 (奥下)
+F16::LShift ; G7 (手前上)
+F17::RButton ; G8 (中列上)
+F18::Send,F18 ; G9 (奥上)
+RButton & F13::AltTab
+RButton & F14::Send,F20
+RButton & F15::Send,F21
+RButton & F16::#Tab
+RButton & F17::Send,F23
+RButton & F18::Send,F24
 
 ; ★ 候補 ②
 ; RButton は GetKyeState(RButton, P) で物理的な押し下げ状態を判定する分岐の方が良いかも。
 /*
-
+F13::GetKeyState(Rbutton, "P") ? [] : Rbutton
 */
