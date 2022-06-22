@@ -152,6 +152,8 @@ sc03A & l::send, {Blind}{Right}
 ; CtrlとShiftでの加速減速はWindowsのマウスキー機能を踏襲
 ; 精密操作がしたい時は、無変換+Ctrl+WASD でカーソルを細かく動かせる。
 */
+
+
 ~sc07B & W::
 ~sc07B & A::
 ~sc07B & S::
@@ -163,15 +165,16 @@ sc03A & l::send, {Blind}{Right}
         MoveX += GetKeyState("A", "P") ? -11 : 0
         MoveY += GetKeyState("S", "P") ? 11 : 0
         MoveX += GetKeyState("D", "P") ? 11 : 0
-        MoveX *= GetKeyState("Shift", "P") ? 5 : 1   ; Ctrlキーが押されている間は座標を10倍にし続ける(スピードアップ)
-        MoveY *= GetKeyState("Shift", "P") ? 5 : 1
-        MoveX *= GetKeyState("Ctrl", "P") ? 0.3 : 1 ; Shiftキーが押されている間は座標を30%にする（スピードダウン）
-        MoveY *= GetKeyState("Ctrl", "P") ? 0.3 : 1
+        MoveX *= GetKeyState("Ctrl", "P") ? 5 : 1   ; Ctrlキーが押されている間は座標を10倍にし続ける(スピードアップ)
+        MoveY *= GetKeyState("Ctrl", "P") ? 5 : 1
+        MoveX *= GetKeyState("Shift", "P") ? 0.3 : 1 ; Shiftキーが押されている間は座標を30%にする（スピードダウン）
+        MoveY *= GetKeyState("Shift", "P") ? 0.3 : 1
         MouseMove, %MoveX%, %MoveY%, 1, R            ; マウスカーソルを移動。MouseMove, X, Y [, Speed, R]。R は現在のカーソル位置からの相対座標になる。
         Sleep, 10                                     ; 負荷が高い場合は設定を変更 設定できる値は-1、0、10～m秒 詳細はSleep
     }
     Return
 Return
+
 
 ; 無変換 を押している間は、JK を左右クリックとして扱う。
 ; (無変換を押しながら左右の手でマウスを完全エミュレート出来る状態に。)
@@ -186,3 +189,8 @@ Return
 ~sc07B & Q Up::MouseClick,left,,,,,U
 ~sc07B & E::MouseClick,right,,,,,D
 ~sc07B & E Up::MouseClick,right,,,,,U
+
+; 上記のスクリプトは、右クリックに相当するのでマウスポインタ位置に出る。
+; キーカーソル位置に出るように、キーボードの App. Key を割り当てる。
+; AppsKey sc15D コンテキストメニューの表示 (ネイティブの割当で Shift + F10 もあるらしい)
+~sc079 & M::Send,{Blind}{AppsKey}    ; ひとまず、変換 + M に割り当ててみた。(M, Menu キーカーソルの位置に使うので HJKL の近くに配置)
