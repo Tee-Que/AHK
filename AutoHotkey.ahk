@@ -77,9 +77,12 @@ Return
 ~sc079 & sc027::Send,{Blind}{BS}
 ~sc079 & sc028::Send,{Blind}{Delete}
 */
-; ↓ カーソル移動を IJKL に変えた流れで、BackSpace を P、Detele を ; に変更
+; ↓ カーソル移動を IJKL に変えた流れで、BackSpace を P、Detele を ; (sc027) → : (sc028) に変更
 ~sc079 & P::Send,{Blind}{BS}
-~sc079 & sc027::Send,{Blind}{Delete}
+~sc079 & sc028::Send,{Blind}{Delete}
+
+~sc079 & H::Send,{Blind}{BS}
+~sc079 & G::Send,{Blind}{Delete}
 
 /*
 ------------------------------------------------------------------------------
@@ -221,3 +224,34 @@ Return
 ~sc07B & A Up::MouseClick,left,,,,,U
 ~sc07B & Z::MouseClick,right,,,,,D
 ~sc07B & Z Up::MouseClick,right,,,,,U
+
+~sc07B & R::MouseClick,WheelUp,,,,,D
+~sc07B & R Up::MouseClick,WheelUp,,,,,U
+~sc07B & V::MouseClick,WheelDown,,,,,D
+~sc07B & V Up::MouseClick,WheelDown,,,,,U
+
+
+
+/*
+-----------------------------------------------------------------------------
+    アプリケーションごとのショートカット
+------------------------------------------------------------------------------
+*/
+
+; ページ指定欄にフォーカス
+#IfWinActive ahk_exe LVEDVIEWER.exe
+    ^E::
+        MouseGetPos, x0, y0
+        WinGetPos, X, Y, Width, Height
+        MouseMove, 260, 60
+        MouseClick, left
+        MouseMove, x0, y0
+    Return
+    ^F::
+        MouseGetPos, x0, y0
+        WinGetPos, X, Y, Width, Height
+        MouseMove, Width * 0.43, 120
+        MouseClick, left
+        MouseMove, x0, y0
+    Return
+#IfWinActive
