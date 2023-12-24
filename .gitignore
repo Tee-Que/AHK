@@ -4,6 +4,6 @@
 # ディレクトリ以下を除外： dir
 Compiler/
 /*.exe
-/G600.ahk
 /G604.ahk
+/G600.ahk
 /WindowSpy.ahk
