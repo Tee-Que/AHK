@@ -95,6 +95,28 @@ RButton & LButton::RButton
     Return
 #IfWinActive
 
+
+
+#IfWinActive ahk_exe LVEDVIEWER.exe
+    ; ページ指定欄にフォーカス
+    ^E::
+        MouseGetPos, x0, y0
+        WinGetPos, X, Y, Width, Height
+        MouseMove, 260, 60
+        MouseClick, left
+        MouseMove, x0, y0
+    Return
+    ^F::
+        MouseGetPos, x0, y0
+        WinGetPos, X, Y, Width, Height
+        MouseMove, Width * 0.43, 120
+        MouseClick, left
+        MouseMove, x0, y0
+    Return
+#IfWinActive
+
+
+
 /*
 ------------------------------------------------------------------------------
 ★ G604 のサイドボタン割当： アクティブウインドウ無し時
