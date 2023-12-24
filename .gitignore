@@ -3,7 +3,7 @@
 # ルートディレクトリを指定： root.html
 # ディレクトリ以下を除外： dir
 Compiler/
-*.exe
-G600.ahk
-G604.ahk
-WindowSpy.ahk
+/*.exe
+/G600.ahk
+/G604.ahk
+/WindowSpy.ahk
